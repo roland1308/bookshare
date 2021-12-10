@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "02b6da63-9f6a-4f6f-8f4f-9e648197e386",
+		"name": "Books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjgwNTg1Zjk5MjExMmZmODgxMTEzOTlhMzY5NzU2MTc1YWExYjRjZjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2lmb2ZsdXR0ZXItOTgyYTciLCJhdWQiOiJjaWZvZmx1dHRlci05ODJhNyIsImF1dGhfdGltZSI6MTYzODM0OTkxNywidXNlcl9pZCI6IldrbzV3TjV1eDFPeTA3bElSVnJxTzVwek5sZDIiLCJzdWIiOiJXa281d041dXgxT3kwN2xJUlZycU81cHpObGQyIiwiaWF0IjoxNjM4MzQ5OTE3LCJleHAiOjE2MzgzNTM1MTcsImVtYWlsIjoiam1hc3NhbmFwcmF0czJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImptYXNzYW5hcHJhdHMyQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.DqWMd4uc23kG_lRIdNK27hTbAB5w7MgXeFX0rDFcRTBd1lg2y1fLC-19ji1pDpTZ6E7Ksy2FgRRNM4Yul14FSGTDDh8afE-z1FBLAyFsjUupM4-etvVYDEzDYTszioTHVQFx0ilmOMF9aqhuY5Zu-xCPDKXqTclwOhG_ehPWCW6YD8i_5WUiKRN74SIyemhwW8WfJPdbeIl2vgorGNkbN7f_y9zb6BqN3kWwlk6h3tbaveyICNzaOlXmzk_gtzU4dxIkzfs0Wcx5BIVcZnmXBL96yniQVpnezpUmdhGAdd_D7SyNJkoy_eKGcDh3GG3xKPOKCyp47EKHl1XqlaHgkA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\":\"08905\",\n    \"title\":\"El alquimista\" ,\n    \"coverLink\":\"https://....\",\n    \"status\":\"Shared\",\n    \"availability\":\"0\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/book/add",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"book",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove book",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjgwNTg1Zjk5MjExMmZmODgxMTEzOTlhMzY5NzU2MTc1YWExYjRjZjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2lmb2ZsdXR0ZXItOTgyYTciLCJhdWQiOiJjaWZvZmx1dHRlci05ODJhNyIsImF1dGhfdGltZSI6MTYzODM0OTkxNywidXNlcl9pZCI6IldrbzV3TjV1eDFPeTA3bElSVnJxTzVwek5sZDIiLCJzdWIiOiJXa281d041dXgxT3kwN2xJUlZycU81cHpObGQyIiwiaWF0IjoxNjM4MzQ5OTE3LCJleHAiOjE2MzgzNTM1MTcsImVtYWlsIjoiam1hc3NhbmFwcmF0czJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImptYXNzYW5hcHJhdHMyQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.DqWMd4uc23kG_lRIdNK27hTbAB5w7MgXeFX0rDFcRTBd1lg2y1fLC-19ji1pDpTZ6E7Ksy2FgRRNM4Yul14FSGTDDh8afE-z1FBLAyFsjUupM4-etvVYDEzDYTszioTHVQFx0ilmOMF9aqhuY5Zu-xCPDKXqTclwOhG_ehPWCW6YD8i_5WUiKRN74SIyemhwW8WfJPdbeIl2vgorGNkbN7f_y9zb6BqN3kWwlk6h3tbaveyICNzaOlXmzk_gtzU4dxIkzfs0Wcx5BIVcZnmXBL96yniQVpnezpUmdhGAdd_D7SyNJkoy_eKGcDh3GG3xKPOKCyp47EKHl1XqlaHgkA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\":\"08905\",\n    \"title\":\"El alquimista\" ,\n    \"coverLink\":\"https://....\",\n    \"status\":\"Shared\",\n    \"availability\":0\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/book/add",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"book",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJlMzZhMWNiZDBiMjE2NjYxOTViZGIxZGZhMDFiNGNkYjAwNzg3OWQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2lmb2ZsdXR0ZXItOTgyYTciLCJhdWQiOiJjaWZvZmx1dHRlci05ODJhNyIsImF1dGhfdGltZSI6MTYzNzY3MDM4MCwidXNlcl9pZCI6InhkUlhpc096WHFiOWZqaEdDSWFLeUw2eURPdDIiLCJzdWIiOiJ4ZFJYaXNPelhxYjlmamhHQ0lhS3lMNnlET3QyIiwiaWF0IjoxNjM3NjcwMzgwLCJleHAiOjE2Mzc2NzM5ODAsImVtYWlsIjoicG9ydW5haWRlYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicG9ydW5haWRlYUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.DHZD5QVSw6R7MG-KtT2lcxKqwSfZopCwLQ26Zic-2iAhhpyWj_7pq56jXO5iMdvh3mdi9XrwyAIpCX2oGKHF96Y8672h1hFbT97_1GpeC_JOtUbbH-ZX7YBLZWacOoB-l_e30RgIBGkwEySu0jf4u_69elM4xARqPjRIyx8aW3tQISj2PcuPWRrCkmV9WlV3YbbtKdQm3mpu16Fwph0CONev7ilvamF0bmn78MLz36G-fg6AYhpG7mce-Vn_9e5WmHF8GzcyUIo1UXJ1a1MEmo10yQx5K1TsHXE7Z7bTxQwnlvUqIa_xswO2MHM9rDxL-FJJroFWn_G1JdjKfLKPGw",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"jmassanaprats2@gmail.com\",\n    \"password\":\"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/signin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJlMzZhMWNiZDBiMjE2NjYxOTViZGIxZGZhMDFiNGNkYjAwNzg3OWQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2lmb2ZsdXR0ZXItOTgyYTciLCJhdWQiOiJjaWZvZmx1dHRlci05ODJhNyIsImF1dGhfdGltZSI6MTYzNzY3MDM4MCwidXNlcl9pZCI6InhkUlhpc096WHFiOWZqaEdDSWFLeUw2eURPdDIiLCJzdWIiOiJ4ZFJYaXNPelhxYjlmamhHQ0lhS3lMNnlET3QyIiwiaWF0IjoxNjM3NjcwMzgwLCJleHAiOjE2Mzc2NzM5ODAsImVtYWlsIjoicG9ydW5haWRlYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicG9ydW5haWRlYUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.DHZD5QVSw6R7MG-KtT2lcxKqwSfZopCwLQ26Zic-2iAhhpyWj_7pq56jXO5iMdvh3mdi9XrwyAIpCX2oGKHF96Y8672h1hFbT97_1GpeC_JOtUbbH-ZX7YBLZWacOoB-l_e30RgIBGkwEySu0jf4u_69elM4xARqPjRIyx8aW3tQISj2PcuPWRrCkmV9WlV3YbbtKdQm3mpu16Fwph0CONev7ilvamF0bmn78MLz36G-fg6AYhpG7mce-Vn_9e5WmHF8GzcyUIo1UXJ1a1MEmo10yQx5K1TsHXE7Z7bTxQwnlvUqIa_xswO2MHM9rDxL-FJJroFWn_G1JdjKfLKPGw",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"jmassanaprats2@gmail.com\",\n    \"password\":\"123456\",\n    \"confirmPassword\":\"123456\"\n\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/signup",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "share book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjgwNTg1Zjk5MjExMmZmODgxMTEzOTlhMzY5NzU2MTc1YWExYjRjZjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2lmb2ZsdXR0ZXItOTgyYTciLCJhdWQiOiJjaWZvZmx1dHRlci05ODJhNyIsImF1dGhfdGltZSI6MTYzODM1NDM0NiwidXNlcl9pZCI6IldrbzV3TjV1eDFPeTA3bElSVnJxTzVwek5sZDIiLCJzdWIiOiJXa281d041dXgxT3kwN2xJUlZycU81cHpObGQyIiwiaWF0IjoxNjM4MzU0MzQ2LCJleHAiOjE2MzgzNTc5NDYsImVtYWlsIjoiam1hc3NhbmFwcmF0czJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImptYXNzYW5hcHJhdHMyQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.mTMFD_6T2_55pYcImVnveNr5LP3qIw28qtF_LMrMgjRbk8a0TfhLOmhSwY14b5yUjBKnoPP-TN12zeofEH59poG0Ymugt3lb-b1viBP1n8lmapoqwz2TZkh8J6KL1HFBU3ZD_Z2DxLw2Z_n9CAJF34_bjUbRpnchiLmqPZeJMeMYINII6FcFHRvovtP4EETy_Q3zdNybrtEdkMBaKF2U1c7BWkPjUIa2AYQ1giYsrJA5Xz_YyoSEMqoEjPIahsHUx5NQRVgvYG5NBcz2CxeZYPrXXxgvdO_8SkkEuNVxC9iyo0zyKXW-hmLmsaYSKcQMxlxJsZZLSUL2itpDnH30LQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/book/share/08905",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"book",
+						"share",
+						"08905"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjgwNTg1Zjk5MjExMmZmODgxMTEzOTlhMzY5NzU2MTc1YWExYjRjZjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2lmb2ZsdXR0ZXItOTgyYTciLCJhdWQiOiJjaWZvZmx1dHRlci05ODJhNyIsImF1dGhfdGltZSI6MTYzODM0OTkxNywidXNlcl9pZCI6IldrbzV3TjV1eDFPeTA3bElSVnJxTzVwek5sZDIiLCJzdWIiOiJXa281d041dXgxT3kwN2xJUlZycU81cHpObGQyIiwiaWF0IjoxNjM4MzQ5OTE3LCJleHAiOjE2MzgzNTM1MTcsImVtYWlsIjoiam1hc3NhbmFwcmF0czJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImptYXNzYW5hcHJhdHMyQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.DqWMd4uc23kG_lRIdNK27hTbAB5w7MgXeFX0rDFcRTBd1lg2y1fLC-19ji1pDpTZ6E7Ksy2FgRRNM4Yul14FSGTDDh8afE-z1FBLAyFsjUupM4-etvVYDEzDYTszioTHVQFx0ilmOMF9aqhuY5Zu-xCPDKXqTclwOhG_ehPWCW6YD8i_5WUiKRN74SIyemhwW8WfJPdbeIl2vgorGNkbN7f_y9zb6BqN3kWwlk6h3tbaveyICNzaOlXmzk_gtzU4dxIkzfs0Wcx5BIVcZnmXBL96yniQVpnezpUmdhGAdd_D7SyNJkoy_eKGcDh3GG3xKPOKCyp47EKHl1XqlaHgkA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\":\"08905\",\n    \"title\":\"El alquimista\" ,\n    \"coverLink\":\"https://....\",\n    \"status\":\"Shared\",\n    \"availability\":\"0\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/book/users/08905",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"book",
+						"users",
+						"08905"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users with books",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjgwNTg1Zjk5MjExMmZmODgxMTEzOTlhMzY5NzU2MTc1YWExYjRjZjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2lmb2ZsdXR0ZXItOTgyYTciLCJhdWQiOiJjaWZvZmx1dHRlci05ODJhNyIsImF1dGhfdGltZSI6MTYzODM0OTkxNywidXNlcl9pZCI6IldrbzV3TjV1eDFPeTA3bElSVnJxTzVwek5sZDIiLCJzdWIiOiJXa281d041dXgxT3kwN2xJUlZycU81cHpObGQyIiwiaWF0IjoxNjM4MzQ5OTE3LCJleHAiOjE2MzgzNTM1MTcsImVtYWlsIjoiam1hc3NhbmFwcmF0czJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImptYXNzYW5hcHJhdHMyQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.DqWMd4uc23kG_lRIdNK27hTbAB5w7MgXeFX0rDFcRTBd1lg2y1fLC-19ji1pDpTZ6E7Ksy2FgRRNM4Yul14FSGTDDh8afE-z1FBLAyFsjUupM4-etvVYDEzDYTszioTHVQFx0ilmOMF9aqhuY5Zu-xCPDKXqTclwOhG_ehPWCW6YD8i_5WUiKRN74SIyemhwW8WfJPdbeIl2vgorGNkbN7f_y9zb6BqN3kWwlk6h3tbaveyICNzaOlXmzk_gtzU4dxIkzfs0Wcx5BIVcZnmXBL96yniQVpnezpUmdhGAdd_D7SyNJkoy_eKGcDh3GG3xKPOKCyp47EKHl1XqlaHgkA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/api/book/users/08907 ",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"book",
+						"users",
+						"08907 "
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
