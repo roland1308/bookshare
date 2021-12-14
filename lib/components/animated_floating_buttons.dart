@@ -1,3 +1,4 @@
+import 'package:book_share/localizations/i18n.dart';
 import 'package:book_share/pages/search_library_page.dart';
 import 'package:book_share/pages/search_users_page.dart';
 import 'package:flutter/material.dart';
@@ -48,12 +49,104 @@ class _AnimatedFloatingButtonsState extends State<AnimatedFloatingButtons>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
+    return !_isOpen
+    ? InkWell(
+      onTap: openClose,
+      child: Container(
+        color: Colors.transparent,
+        child: SizedBox.expand(
+          child: Stack(
+            children: [
+              Positioned(
+                width: 40,
+                bottom: 10 + 55 * animation!.value,
+                right: 20,
+                child: FloatingActionButton(
+                  heroTag: null,
+                  onPressed: () {
+                    openClose();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SearchLibrary(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.add),
+                ),
+              ),
+              if (animation!.value > 0)
+                Positioned(
+                  bottom: 15 + 60 * animation!.value,
+                  right: 65,
+                  child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.blue.withOpacity(animation!.value * .7),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Center(
+                          child: Text(
+                        "Search within OpenLibrary.org".i18n,
+                        style: const TextStyle(color: Colors.white),
+                      ))),
+                ),
+              Positioned(
+                width: 40,
+                bottom: 15 + 97 * animation!.value,
+                right: 20,
+                child: FloatingActionButton(
+                  heroTag: null,
+                  onPressed: () {
+                    openClose();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SearchUsers(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.people),
+                ),
+              ),
+              if (animation!.value > 0)
+                Positioned(
+                  bottom: 15 + 107 * animation!.value,
+                  right: 65,
+                  child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.blue.withOpacity(animation!.value * .7),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Center(
+                          child: Text(
+                        "Search within users".i18n,
+                        style: const TextStyle(color: Colors.white),
+                      ))),
+                ),
+              Positioned(
+                width: 60,
+                bottom: 10,
+                right: 10,
+                child: FloatingActionButton(
+                  heroTag: null,
+                  onPressed: () => openClose(),
+                  child: AnimatedIcon(
+                      icon: AnimatedIcons.menu_close, progress: animation!),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    )
+    :SizedBox.expand(
       child: Stack(
         children: [
           Positioned(
             width: 40,
-            bottom: 10 + 50 * animation!.value,
+            bottom: 10 + 55 * animation!.value,
             right: 20,
             child: FloatingActionButton(
               heroTag: null,
@@ -71,23 +164,23 @@ class _AnimatedFloatingButtonsState extends State<AnimatedFloatingButtons>
           ),
           if (animation!.value > 0)
             Positioned(
-              bottom: 15 + 55 * animation!.value,
+              bottom: 15 + 60 * animation!.value,
               right: 65,
               child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(animation!.value * .7),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
-                  child: const Center(
+                      const BorderRadius.all(Radius.circular(20))),
+                  child: Center(
                       child: Text(
-                    "Search within OpenLibrary.org",
-                    style: TextStyle(color: Colors.white),
-                  ))),
+                        "Search within OpenLibrary.org".i18n,
+                        style: const TextStyle(color: Colors.white),
+                      ))),
             ),
           Positioned(
             width: 40,
-            bottom: 15 + 90 * animation!.value,
+            bottom: 15 + 97 * animation!.value,
             right: 20,
             child: FloatingActionButton(
               heroTag: null,
@@ -105,19 +198,19 @@ class _AnimatedFloatingButtonsState extends State<AnimatedFloatingButtons>
           ),
           if (animation!.value > 0)
             Positioned(
-              bottom: 15 + 100 * animation!.value,
+              bottom: 15 + 107 * animation!.value,
               right: 65,
               child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(animation!.value * .7),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
-                  child: const Center(
+                      const BorderRadius.all(Radius.circular(20))),
+                  child: Center(
                       child: Text(
-                    "Search within users",
-                    style: TextStyle(color: Colors.white),
-                  ))),
+                        "Search within users".i18n,
+                        style: const TextStyle(color: Colors.white),
+                      ))),
             ),
           Positioned(
             width: 60,

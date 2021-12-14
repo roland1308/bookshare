@@ -10,6 +10,7 @@ String kBaseUrl =
     "https://us-central1-cifoflutter-982a7.cloudfunctions.net/app";
 
 class UserRepository {
+
   final SystemController systemCtrl = Get.find<SystemController>();
   final UserController userCtrl = Get.find<UserController>();
 

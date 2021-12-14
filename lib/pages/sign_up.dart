@@ -1,7 +1,7 @@
 import 'package:book_share/controllers/system_controller.dart';
 import 'package:book_share/database/user_repository.dart';
+import 'package:book_share/localizations/i18n.dart';
 import 'package:book_share/pages/my_library_page.dart';
-import 'package:book_share/pages/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +46,7 @@ class _SignUpState extends State<SignUp> {
                       validator: (text) {
                         text ??= "";
                         if (!isEmail(text)) {
-                          return "Incorrect email format!";
+                          return "Incorrect email format!".i18n;
                         }
                         return null;
                       },
@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
                       keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                       decoration: buildInputDecoration(
-                          hintText: "Email",
+                          hintText: "Email".i18n,
                           prefixIcon: const Icon(Icons.person_outline,
                               color: Colors.black26)),
                     ),
@@ -63,9 +63,9 @@ class _SignUpState extends State<SignUp> {
                       validator: (text) {
                         text ??= "";
                         if (text.length < 6) {
-                          return "Password must be at least 6 characters length!";
+                          return "Password must be at least 6 characters length!".i18n;
                         } else if (text != password2Controller.text) {
-                          return "Passwords must coincide";
+                          return "Passwords must coincide".i18n;
                         }
                         return null;
                       },
@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                       controller: password1Controller,
                       obscureText: isObscured1,
                       decoration: buildInputDecoration(
-                        hintText: "Password",
+                        hintText: "Password".i18n,
                         prefixIcon: const Icon(Icons.lock_outline,
                             color: Colors.black26),
                         suffixIcon: InkWell(
@@ -95,9 +95,9 @@ class _SignUpState extends State<SignUp> {
                       validator: (text) {
                         text ??= "";
                         if (text.length < 6) {
-                          return "Password must be at least 6 characters length!";
+                          return "Password must be at least 6 characters length!".i18n;
                         } else if (text != password1Controller.text) {
-                          return "Passwords must coincide";
+                          return "Passwords must coincide".i18n;
                         }
                         return null;
                       },
@@ -105,7 +105,7 @@ class _SignUpState extends State<SignUp> {
                       controller: password2Controller,
                       obscureText: isObscured2,
                       decoration: buildInputDecoration(
-                        hintText: "Repeat Password",
+                        hintText: "Repeat Password".i18n,
                         prefixIcon: const Icon(Icons.lock_outline,
                             color: Colors.black26),
                         suffixIcon: InkWell(
@@ -146,20 +146,20 @@ class _SignUpState extends State<SignUp> {
                                       await UserRepository().signUp(newUser);
                                   if (result["success"]) {
                                     systemCtrl.setIsLogged(true);
-                                    Get.snackbar("Great!",
-                                        "User registered successfully",
+                                    Get.snackbar("Great!".i18n,
+                                        "User registered successfully".i18n,
                                         snackPosition: SnackPosition.BOTTOM);
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) => MyLibraryPage(),
+                                          builder: (_) => const MyLibraryPage(),
                                         ),
                                         (route) => false);
                                   } else {
                                     Get.defaultDialog(
                                         title: "Error",
                                         content: Text(result["message"] ??
-                                            "An error occurred, please retry"));
+                                            "An error occurred, please retry".i18n));
                                   }
                                   setState(() {
                                     isLoading = false;
@@ -167,29 +167,29 @@ class _SignUpState extends State<SignUp> {
                                 } else {
                                   Get.defaultDialog(
                                     title: "Error",
-                                    content: const Text(
-                                        "Please correct input errors"),
+                                    content: Text(
+                                        "Please correct input errors".i18n),
                                   );
                                 }
                               },
                         child: isLoading
                             ? const CircularProgressIndicator()
-                            : const Text("Sign Up"),
+                            : Text("Sign Up".i18n),
                       ),
                     ),
                     const SizedBox(height: 40),
                     InkWell(
                       child: RichText(
-                        text: const TextSpan(
-                          style: TextStyle(
+                        text: TextSpan(
+                          style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 20),
                           children: [
-                            TextSpan(text: "Already registered?"),
+                            TextSpan(text: "Already registered?".i18n),
                             TextSpan(
-                              text: " Sign In!",
-                              style: TextStyle(
+                              text: " Sign In!".i18n,
+                              style: const TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold),
                             )

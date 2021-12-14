@@ -3,6 +3,7 @@ import 'package:book_share/components/show_book_by_tag.dart';
 import 'package:book_share/controllers/user_controller.dart';
 import 'package:book_share/database/book_repository.dart';
 import 'package:book_share/database/database_service.dart';
+import 'package:book_share/localizations/i18n.dart';
 import 'package:book_share/models/book_search_model.dart';
 import 'package:book_share/models/user_details_model.dart';
 import 'package:book_share/services/helpers.dart';
@@ -28,7 +29,7 @@ class _SearchLibrary extends State<SearchLibrary> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Search OpenLibrary.org"),
+        title: Text("Search OpenLibrary.org".i18n),
       ),
       body: Container(
         decoration: backImageDecoration(),
@@ -47,7 +48,7 @@ class _SearchLibrary extends State<SearchLibrary> {
                         ? () => doSearch(searchTitleController.text)
                         : () => {},
                     child: !isLoading
-                        ? const Text("Search")
+                        ? Text("Search".i18n)
                         : const SizedBox(
                             width: 18,
                             height: 18,
@@ -65,7 +66,7 @@ class _SearchLibrary extends State<SearchLibrary> {
                               icon1: const Icon(Icons.add),
                               color1: Colors.green,
                             )
-                          : const Center(child: Text("No results.")))
+                          : Center(child: Text("No results.".i18n)))
                 ],
               )),
         ),
@@ -98,7 +99,7 @@ class _SearchLibrary extends State<SearchLibrary> {
       }
       listOfBooks = searchResultAsBooks;
     } else {
-      Get.defaultDialog(title: res["message"]);
+      Get.defaultDialog(content: Text(res["message"]));
     }
     setState(() {
       isLoading = false;

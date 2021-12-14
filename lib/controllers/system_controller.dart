@@ -4,6 +4,7 @@ class SystemController extends GetxController {
 
   var isLogged = false.obs;
   var token = "".obs;
+  var unreadMsgs = 0.obs;
 
   void setIsLogged(value){
     isLogged.value = value;
@@ -11,6 +12,10 @@ class SystemController extends GetxController {
 
   void setToken(value){
     token.value = value;
+  }
+
+  void addUnreadMsgs(){
+    unreadMsgs.value++;
   }
 
 }

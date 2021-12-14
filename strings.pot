@@ -1,0 +1,139 @@
+msgctxt "./lib\\components\\animated_floating_buttons.dart:177"
+msgid "Search within OpenLibrary.org"
+msgstr ""
+
+msgctxt "./lib\\components\\animated_floating_buttons.dart:211"
+msgid "Search within users"
+msgstr ""
+
+msgctxt "./lib\\pages\\chats_list.dart:41"
+msgid "Your active chats"
+msgstr ""
+
+msgctxt "./lib\\pages\\chats_list.dart:61"
+msgid "There are no chats"
+msgstr ""
+
+msgctxt "./lib\\pages\\edit_book_page.dart:92"
+msgid "Edit your book's details"
+msgstr ""
+
+msgctxt "./lib\\pages\\edit_book_page.dart:170"
+msgid "Change"
+msgstr ""
+
+msgctxt "./lib\\pages\\edit_book_page.dart:191"
+msgid "Donate"
+msgstr ""
+
+msgctxt "./lib\\pages\\edit_book_page.dart:218"
+msgid "Sell"
+msgstr ""
+
+msgctxt "./lib\\pages\\edit_book_page.dart:239"
+msgid "Wanted"
+msgstr ""
+
+msgctxt "./lib\\pages\\edit_book_page.dart:271"
+msgid "Book details"
+msgstr ""
+
+msgctxt "./lib\\pages\\edit_book_page.dart:293"
+msgid "Type a description for your book"
+msgstr ""
+
+msgctxt "./lib\\pages\\my_library_page.dart:109"
+msgid "My Library"
+msgstr ""
+
+msgctxt "./lib\\pages\\my_library_page.dart:145"
+msgid "No books added in your personal library."
+msgstr ""
+
+msgctxt "./lib\\pages\\search_library_page.dart:32"
+msgid "Search OpenLibrary.org"
+msgstr ""
+
+msgctxt "./lib\\pages\\search_library_page.dart:51"
+msgid "Search"
+msgstr ""
+
+msgctxt "./lib\\pages\\search_users_page.dart:99"
+msgid "No results."
+msgstr ""
+
+msgctxt "./lib\\pages\\search_users_page.dart:61"
+msgid "Search other user's books"
+msgstr ""
+
+msgctxt "./lib\\pages\\search_users_page.dart:74"
+msgid "Filter by title"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:49"
+msgid "Incorrect email format!"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:57"
+msgid "Email"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:98"
+msgid "Password must be at least 6 characters length!"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:76"
+msgid "Password"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_in.dart:131"
+msgid "Remember me"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:149"
+msgid "Great!"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_in.dart:160"
+msgid "Login success"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:171"
+msgid "Please correct input errors"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_in.dart:192"
+msgid "Sign In"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_in.dart:211"
+msgid "Not yet registered?"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:100"
+msgid "Passwords must coincide"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:108"
+msgid "Repeat Password"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:150"
+msgid "User registered successfully"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:162"
+msgid "An error occurred, please retry"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:177"
+msgid "Sign Up"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:189"
+msgid "Already registered?"
+msgstr ""
+
+msgctxt "./lib\\pages\\sign_up.dart:191"
+msgid " Sign In!"
+msgstr ""

@@ -1,10 +1,12 @@
 import 'package:book_share/controllers/system_controller.dart';
 import 'package:book_share/database/user_repository.dart';
+import 'package:book_share/localizations/i18n.dart';
 import 'package:book_share/pages/sign_up.dart';
 import 'package:book_share/services/helpers.dart';
 import 'package:book_share/services/shared_prefs_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:i18n_extension/i18n_widget.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -25,6 +27,9 @@ class _SignInState extends State<SignIn> {
   bool isRememberMe = false;
   final _formKey = GlobalKey<FormState>();
 
+  var items = ["ES","EN","IT"];
+  String _dropdownValue = "EN";
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -43,13 +48,32 @@ class _SignInState extends State<SignIn> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+
+
+                      DropdownButton(
+                          value: I18n.of(context).locale.languageCode.toUpperCase(),
+                          icon: const Icon(Icons.arrow_downward),
+                          onChanged: (String? newValue){
+                            setState(() {
+                              _dropdownValue = newValue!;
+                              I18n.of(context).locale = Locale(newValue.toLowerCase(),"");
+                            });
+                          },
+                          items: items.map(
+                                  (String value)=>DropdownMenuItem(
+                                  value: value,
+                                  child: Text(value))).toList()
+
+                      ),
+
+
                       const Image(image: AssetImage("assets/images/title.png")),
                       const SizedBox(height: 40),
                       TextFormField(
                         validator: (text) {
                           text ??= "";
                           if (!isEmail(text)) {
-                            return "Incorrect email format!";
+                            return "Incorrect email format!".i18n;
                           }
                           return null;
                         },
@@ -57,7 +81,7 @@ class _SignInState extends State<SignIn> {
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         decoration: buildInputDecoration(
-                            hintText: "Email",
+                            hintText: "Email".i18n,
                             prefixIcon: const Icon(Icons.person_outline,
                                 color: Colors.black26)),
                       ),
@@ -66,7 +90,7 @@ class _SignInState extends State<SignIn> {
                         validator: (text) {
                           text ??= "";
                           if (text.length < 6) {
-                            return "Password must be at least 6 characters length!";
+                            return "Password must be at least 6 characters length!".i18n;
                           }
                           return null;
                         },
@@ -74,7 +98,7 @@ class _SignInState extends State<SignIn> {
                         controller: password1Controller,
                         obscureText: isObscured1,
                         decoration: buildInputDecoration(
-                          hintText: "Password",
+                          hintText: "Password".i18n,
                           prefixIcon: const Icon(Icons.lock_outline,
                               color: Colors.black26),
                           suffixIcon: InkWell(
@@ -104,7 +128,7 @@ class _SignInState extends State<SignIn> {
                               });
                             },
                           ),
-                          const Text("Remember me")
+                          Text("Remember me".i18n)
                         ],
                       ),
                       const SizedBox(height: 40),
@@ -133,7 +157,7 @@ class _SignInState extends State<SignIn> {
                                     });
                                     if (result["success"]) {
                                       systemCtrl.setToken(result["token"]);
-                                      Get.snackbar("Great!", "Login success",
+                                      Get.snackbar("Great!".i18n, "Login success".i18n,
                                           snackPosition: SnackPosition.BOTTOM);
                                       if (isRememberMe) {
                                         await setPrefsValue(
@@ -158,13 +182,14 @@ class _SignInState extends State<SignIn> {
                                   } else {
                                     Get.defaultDialog(
                                         title: "Error",
-                                        content: const Text(
-                                            "Please correct input errors"));
+                                        content: Text(
+                                            "Please correct input errors".i18n));
                                   }
                                 },
+
                           child: isLoading
                               ? const CircularProgressIndicator()
-                              : const Text("Sign In"),
+                              : Text("Sign In".i18n),
                         ),
                       ),
                       const SizedBox(height: 40),
@@ -177,14 +202,14 @@ class _SignInState extends State<SignIn> {
                               ));
                         },
                         child: RichText(
-                            text: const TextSpan(
-                                style: TextStyle(
+                            text: TextSpan(
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.normal,
                                     fontSize: 20),
                                 children: [
-                              TextSpan(text: "Not yet registered?"),
-                              TextSpan(
+                              TextSpan(text: "Not yet registered?".i18n),
+                              const TextSpan(
                                   text: " Sign Up!",
                                   style: TextStyle(
                                       color: Colors.green,

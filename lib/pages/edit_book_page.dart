@@ -1,6 +1,7 @@
 import 'package:book_share/components/show_book_by_tag.dart';
 import 'package:book_share/controllers/user_controller.dart';
 import 'package:book_share/database/book_repository.dart';
+import 'package:book_share/localizations/i18n.dart';
 import 'package:book_share/models/user_details_model.dart';
 import 'package:book_share/services/helpers.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class _EditBookState extends State<EditBook> {
               backgroundColor: Colors.red)
           : null,
       appBar: AppBar(
-        title: const Text("Edit your book's details"),
+        title: Text("Edit your book's details".i18n),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -165,17 +166,18 @@ class _EditBookState extends State<EditBook> {
                                   children: [
                                     Expanded(
                                       child: CheckboxListTile(
-                                        title: const Text(
-                                          "Change",
-                                          style: TextStyle(
+                                        title: Text(
+                                          "Change".i18n,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                         contentPadding: const EdgeInsets.all(0),
                                         value: _isChange,
                                         dense: true,
                                         onChanged: (newValue) {
-                                          if (newValue != null && newValue)
+                                          if (newValue != null && newValue) {
                                             _isWanted = false;
+                                          }
                                           _isChange = newValue!;
                                           checkChanges();
                                         },
@@ -185,17 +187,18 @@ class _EditBookState extends State<EditBook> {
                                     ),
                                     Expanded(
                                       child: CheckboxListTile(
-                                        title: const Text(
-                                          "Donate",
-                                          style: TextStyle(
+                                        title: Text(
+                                          "Donate".i18n,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        contentPadding: EdgeInsets.all(0),
+                                        contentPadding: const EdgeInsets.all(0),
                                         value: _isDonate,
                                         dense: true,
                                         onChanged: (newValue) {
-                                          if (newValue != null && newValue)
+                                          if (newValue != null && newValue) {
                                             _isWanted = false;
+                                          }
                                           _isDonate = newValue!;
                                           checkChanges();
                                         },
@@ -211,17 +214,18 @@ class _EditBookState extends State<EditBook> {
                                   children: [
                                     Expanded(
                                       child: CheckboxListTile(
-                                        title: const Text(
-                                          "Sell",
-                                          style: TextStyle(
+                                        title: Text(
+                                          "Sell".i18n,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                         contentPadding: const EdgeInsets.all(0),
                                         value: _isSell,
                                         dense: true,
                                         onChanged: (newValue) {
-                                          if (newValue != null && newValue)
+                                          if (newValue != null && newValue) {
                                             _isWanted = false;
+                                          }
                                           _isSell = newValue!;
                                           checkChanges();
                                         },
@@ -231,9 +235,9 @@ class _EditBookState extends State<EditBook> {
                                     ),
                                     Expanded(
                                       child: CheckboxListTile(
-                                        title: const Text(
-                                          "Wanted",
-                                          style: TextStyle(
+                                        title: Text(
+                                          "Wanted".i18n,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                         contentPadding: const EdgeInsets.all(0),
@@ -263,9 +267,9 @@ class _EditBookState extends State<EditBook> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  "Book details",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Text(
+                  "Book details".i18n,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 Expanded(
@@ -286,7 +290,7 @@ class _EditBookState extends State<EditBook> {
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
                             decoration: buildStatusDecoration(
-                                hintText: "Type a description for your book"))),
+                                hintText: "Type a description for your book".i18n))),
                   ),
                 )
               ],

@@ -57,6 +57,7 @@ class Book {
   String code;
   String title;
   String coverLink;
+  String? fcmToken;
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
     status: json["status"],

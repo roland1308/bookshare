@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+.gitignore
+/bookshare-8ed63-firebase-adminsdk-er30s-1ce03404c5.json
