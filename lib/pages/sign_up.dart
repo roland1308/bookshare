@@ -145,6 +145,7 @@ class _SignUpState extends State<SignUp> {
                                   Map<String, dynamic> result =
                                       await UserRepository().signUp(newUser);
                                   if (result["success"]) {
+                                    systemCtrl.setToken(result["token"]);
                                     systemCtrl.setIsLogged(true);
                                     Get.snackbar("Great!".i18n,
                                         "User registered successfully".i18n,

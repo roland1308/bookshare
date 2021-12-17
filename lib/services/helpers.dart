@@ -1,3 +1,4 @@
+import 'package:book_share/localizations/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,10 +55,10 @@ BoxDecoration backTransparentDecoration() {
 
 Future<bool> isExitDesired(context) async {
   return await Get.defaultDialog(
-      title: "Exit BookShare",
-      content: const Text("Do you really want to exit BookShare?"),
+      title: "Exit BookShare".i18n,
+      content: Text("Do you really want to exit BookShare?".i18n),
       textCancel: "No",
       onCancel: ()=>Navigator.of(context).pop(false),
-      textConfirm: "Yes, please",
+      textConfirm: "Yes, please".i18n,
       onConfirm: ()=>Navigator.of(context).pop(true));
 }

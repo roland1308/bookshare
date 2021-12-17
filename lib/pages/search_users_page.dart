@@ -1,4 +1,5 @@
 import 'package:book_share/components/grid_view_books.dart';
+import 'package:book_share/controllers/system_controller.dart';
 import 'package:book_share/controllers/user_controller.dart';
 import 'package:book_share/database/chat_repository.dart';
 import 'package:book_share/database/user_repository.dart';
@@ -17,6 +18,8 @@ class SearchUsers extends StatefulWidget {
 
 class _SearchUsersState extends State<SearchUsers> {
   final UserController userCtrl = Get.find<UserController>();
+  final SystemController systemCtrl = Get.find<SystemController>();
+
   String filterText = "";
   List<UserDetails> allUsers = [];
   List<Book> allUsersBooks = [];
@@ -66,37 +69,41 @@ class _SearchUsersState extends State<SearchUsers> {
           child: Container(
               decoration: backTransparentDecoration(),
               padding: const EdgeInsets.all(20),
-              width: MediaQuery.of(context).size.width * 0.95,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.95,
               child: Column(
                 children: [
                   TextField(
                     decoration:
-                        InputDecoration(hintText: "Filter by title".i18n),
-                    onChanged: (value) => setState(() {
-                      searchTitle = value;
-                    }),
+                    InputDecoration(hintText: "Filter by title".i18n),
+                    onChanged: (value) =>
+                        setState(() {
+                          searchTitle = value;
+                        }),
                     controller: searchTitleController,
                   ),
                   const SizedBox(height: 18),
                   Expanded(
                       child: allUsersBooks.isNotEmpty
                           ? GridViewBooks(
-                              listToShow: allUsersBooks
-                                  .where((element) =>
-                                      element.title.contains(searchTitle))
-                                  .toList(),
-                              callBack1: (Book book) => createChat(book),
-                              icon1: const Icon(Icons.connect_without_contact),
-                              color1: Colors.green,
-                            )
+                        listToShow: allUsersBooks
+                            .where((element) =>
+                            element.title.contains(searchTitle))
+                            .toList(),
+                        callBack1: (Book book) => createChat(book),
+                        icon1: const Icon(Icons.connect_without_contact),
+                        color1: Colors.green,
+                      )
                           : isLoading
-                              ? const Center(
-                                  child: SizedBox(
-                                      height: 30,
-                                      width: 30,
-                                      child: CircularProgressIndicator()),
-                                )
-                              : Center(child: Text("No results.".i18n)))
+                          ? const Center(
+                        child: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: CircularProgressIndicator()),
+                      )
+                          : Center(child: Text("No results.".i18n)))
                 ],
               )),
         ),
@@ -105,18 +112,54 @@ class _SearchUsersState extends State<SearchUsers> {
   }
 
   createChat(Book book) async {
-    String recipient = "fTX2hk5bTCWQlCKS4ryCx0:APA91bF-QJbHDtJd98YabiNgmXV4bpGcsEEwfYcmPgcfOPMElatFt5mYsf21-Bhtxr6H5HXl71rpdi7QPHswx-DWydbplRQxgxlWgNtPE-zXeHiLRRvNfG2uHx_XdgTdlVsyb_8yThy-";
-    String title = "Create Chat";
-    String body = "Hello! I'm interested in your book: ${book.title}".i18n;
-    Map<String, dynamic>firebaseResponse = await ChatRepository().sendFirebaseMsg({
-      "to": recipient,
-      "notification": {"title": title, "body": body}
-    });
-    if(firebaseResponse["success"]){
+    Map<String, dynamic> recipientDetailsResponse = await UserRepository()
+        .getUserDetailsById(book.owner);
+    print(recipientDetailsResponse["message"]);
+    if (recipientDetailsResponse["success"]) {
+      String recipient = recipientDetailsResponse["userDetails"].fcmToken;
+      String body = "Hello! I'm interested in your book: ${book.title}".i18n;
+      Map<String, dynamic> firebaseResponse =
+      await ChatRepository().sendFirebaseMsg({
+        "to": recipient,
+        "notification": {"body": body}
+      });
+      if (firebaseResponse["success"]) {
+        Map<String, dynamic> chatCreationResponse =
+        await ChatRepository().createChatTable(book.owner);
+        if (chatCreationResponse["success"]) {
+          String chatId = chatCreationResponse["chat_id"];
+          String token = systemCtrl.token.value;
+          String msg = body;
+          print(chatId);
+          Map<String, dynamic> chatMsgResponse =
+          await ChatRepository().sendMsg(token, chatId, msg);
+          if (chatMsgResponse["success"]) {
+            Get.snackbar("Great!", "Chat request has been sent.".i18n);
+          } else {
+            print(chatMsgResponse["message"]);
 
-      Get.snackbar("Great!", "Chat request has been sent.".i18n);
-
+            return ({
+              "success": false,
+              "message": "An error occurred, please retry"
+            });
+          }
+        } else {
+          return ({
+            "success": false,
+            "message": "An error occurred, please retry"
+          });
+        }
+      } else {
+        return ({
+          "success": false,
+          "message": "An error occurred, please retry"
+        });
+      }
+    } else {
+      return ({
+        "success": false,
+        "message": "An error occurred, please retry"
+      });
     }
-
   }
 }

@@ -12,9 +12,12 @@ import 'package:book_share/models/user_details_model.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
-
-  var currentUser = UserDetails(userId: "userId", email: "email", createdAt: DateTime.now()).obs;
-
+  var currentUser = UserDetails(
+    userId: "userId",
+    email: "email",
+    createdAt: DateTime.now(),
+    books: <Book>[],
+  ).obs;
 
   setCurrentUser(UserDetails loggedUser) {
     currentUser.value = loggedUser;
@@ -26,7 +29,7 @@ class UserController extends GetxController {
   }
 
   removeLibraryBook(String bookCode) {
-    currentUser.value.books?.removeWhere((element) => element.code==bookCode);
+    currentUser.value.books?.removeWhere((element) => element.code == bookCode);
     currentUser.refresh();
   }
 }

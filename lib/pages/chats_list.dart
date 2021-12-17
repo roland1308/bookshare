@@ -21,19 +21,13 @@ class _ChatsListState extends State<ChatsList> {
   bool isLoading = true;
 
   Future<List<ChatDetails>> getAllMyChats() async {
-    Map<String, dynamic> res = await ChatRepository()
-        .getMyChats();
+    Map<String, dynamic> res = await ChatRepository().getMyChats();
     if (res['success']) {
       allChats = res["listOfChats"];
     } else {
       Get.defaultDialog(content: Text(res["message"]));
     }
     return allChats;
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -50,28 +44,51 @@ class _ChatsListState extends State<ChatsList> {
             return const Center(child: CircularProgressIndicator());
           } else {
             if (projectSnap.hasData) {
-              //print('project snapshot data is: ${projectSnap.data}');
-              return ListView.builder(
-                itemCount: projectSnap.data!.length,
-                itemBuilder: (context, index) {
-                  ChatDetails chatDetails = projectSnap.data![index];
-                  return InkWell(
-                    onTap: ()=> Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ChatPage(messages: chatDetails.messages, secondUser: chatDetails.populatedUsers[0].email, chatId: chatDetails.chatId,),
-                      ),
-                    ),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        child:Text(chatDetails.populatedUsers[0].email[0].toUpperCase()),
-                      ),
-                      title: Text(chatDetails.populatedUsers[0].email),
-                      trailing: Text(chatDetails.messages.length.toString()),
-                    ),
-                  );
-                },
-              );
+              return projectSnap.data!.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: projectSnap.data!.length,
+                      itemBuilder: (context, index) {
+                        ChatDetails chatDetails = projectSnap.data![index];
+                        int indexOfSecondUser = chatDetails.populatedUsers
+                            .indexWhere((element) =>
+                        element.email !=
+                            userCtrl.currentUser.value.email);
+                        String secondUserId = chatDetails
+                            .populatedUsers[indexOfSecondUser].userId;
+                        if (chatDetails.messages.isNotEmpty) {
+                          String secondUserEmail = chatDetails
+                              .populatedUsers[chatDetails.populatedUsers
+                                  .indexWhere((element) =>
+                                      element.email !=
+                                      userCtrl.currentUser.value.email)]
+                              .email;
+                          return InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ChatPage(
+                                  msgs: chatDetails.messages,
+                                  secondUserEmail: secondUserEmail,
+                                  secondUserId: secondUserId,
+                                  chatId: chatDetails.chatId,
+                                ),
+                              ),
+                            ),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                child: Text(secondUserEmail[0].toUpperCase()),
+                              ),
+                              title: Text(secondUserEmail),
+                              trailing:
+                                  Text(chatDetails.messages.length.toString()),
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    )
+                  : Center(child: Text("No active chats".i18n));
             } else {
               return Center(child: Text("There are no chats".i18n));
             }
@@ -80,4 +97,5 @@ class _ChatsListState extends State<ChatsList> {
       ),
     );
   }
+
 }

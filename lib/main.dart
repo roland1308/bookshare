@@ -78,7 +78,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print(I18n.of(context).locale.languageCode);
     return isLoading
         ? Container(
             decoration: const BoxDecoration(
@@ -88,9 +87,9 @@ class _MyAppState extends State<MyApp> {
                   fit: BoxFit.cover,
                 )),
             child: const Center(child: CircularProgressIndicator()))
-        : Obx(
-            () => OverlaySupport(
-              child: GetMaterialApp(
+        : OverlaySupport(
+            child: Obx(
+              () => GetMaterialApp(
                 localizationsDelegates: const [
                   GlobalMaterialLocalizations.delegate,
                   //GlobalWidgetsLocalizations.delegate,
@@ -105,7 +104,7 @@ class _MyAppState extends State<MyApp> {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                home: systemCtrl.isLogged.isTrue
+                home: systemCtrl.isLogged.value
                     ? const MyLibraryPage()
                     : const SignIn(),
               ),

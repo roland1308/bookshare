@@ -2,7 +2,7 @@
     package="com.example.book_share">
    <application
         android:label="book_share"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
        <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

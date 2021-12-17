@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-import 'notification.dart';
+import '../services/notification.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
     firebaseMessaging.streamCtlr.stream.listen(_changeData);
     firebaseMessaging.bodyCtlr.stream.listen(_changeBody);
-    firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
+    //firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
 
     // For handling notification when the app is in background
     // but not terminated

@@ -15,7 +15,7 @@ class UserDetails {
     this.position,
     required this.userId,
     required this.email,
-    required this.createdAt,
+    required this.createdAt, this.fcmToken,
   });
 
   List<Book>? books;
@@ -23,6 +23,7 @@ class UserDetails {
   String userId;
   String email;
   DateTime createdAt;
+  String? fcmToken = "";
 
   factory UserDetails.fromJson(Map<String, dynamic> json) => UserDetails(
     books: json["books"] != null ? List<Book>.from(json["books"].map((x) => Book.fromJson(x))) : null,
@@ -30,6 +31,7 @@ class UserDetails {
     userId: json["userId"],
     email: json["email"],
     createdAt: DateTime.parse(json["createdAt"]),
+    fcmToken: json["fcmToken"] != null?json["fcmToken"]:"",
   );
 
   Map<String, dynamic> toJson() => {
@@ -62,7 +64,7 @@ class Book {
   factory Book.fromJson(Map<String, dynamic> json) => Book(
     status: json["status"],
     owner: json["owner"],
-    availability: json["availability"].toString(),
+    availability: json["availability"],
     code: json["code"],
     title: json["title"],
     coverLink: json["coverLink"],
@@ -82,14 +84,17 @@ class Position {
   Position({
     required this.lng,
     required this.lat,
+    this.fcmToken
   });
 
   String lng;
   String lat;
+  String? fcmToken = '';
 
   factory Position.fromJson(Map<String, dynamic> json) => Position(
     lng: json["lng"],
     lat: json["lat"],
+    fcmToken: json["fcmToken"]
   );
 
   Map<String, dynamic> toJson() => {

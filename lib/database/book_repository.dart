@@ -13,6 +13,7 @@ class BookRepository {
 
   Future<Map<String, dynamic>> addBookToMyList(Book newBook) async {
     newBook.code = newBook.code.replaceAll('/', '_');
+    print(newBook.code);
     var uri = Uri.parse("$kBaseUrl/api/book/add");
     var token = systemCtrl.token.value;
     var headers = {"Authorization": token};
@@ -20,6 +21,7 @@ class BookRepository {
     try {
       http.Response response =
           await http.post(uri, body: body, headers: headers);
+      print(response.statusCode);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return ({"success": true, "message": "Book added successfully!"});
       } else {

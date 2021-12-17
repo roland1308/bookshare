@@ -19,18 +19,20 @@ class ChatRepository {
       var key = dotenv.env['firebaseMessagingKey'] ?? '';
       var headers = {"Content-Type":"application/json","Authorization": key};
       var body = json.encode(newChat);
+      print("NEwchat: $body");
+
       http.Response firebaseResponse = await http.post(kFirebaseUri, body:body, headers: headers);
       if (firebaseResponse.statusCode == 200 ) {
         return ({"success": true});
       } else {
-        return ({"success": false, "message": "An error occurred!"});
+        return ({"success": false, "message": "${firebaseResponse.body}"});
       }
     } catch (e) {
       return ({"success": false, "message": e.toString()});
     }
   }
 
-  Future<Map<String, dynamic>> createChat(String secondUser) async {
+  Future<Map<String, dynamic>> createChatTable(String secondUser) async {
     var uri = Uri.parse("$kBaseUrl/api/chat/$secondUser");
     var token = systemCtrl.token.value;
     var headers = {"Authorization": token};
@@ -38,7 +40,7 @@ class ChatRepository {
       http.Response response = await http.post(uri, headers: headers);
       if (response.statusCode >= 200 && response.statusCode < 300) {
 
-        return ({"success": true});
+        return ({"success": true, "chat_id": json.decode(response.body)["chat_id"]});
       } else {
         return ({"success": false, "message": "An error occurred, please retry"});
       }
@@ -50,6 +52,7 @@ class ChatRepository {
   Future<Map<String, dynamic>> getMyChats() async {
     var uri = Uri.parse("$kBaseUrl/api/chat");
     var token = systemCtrl.token.value;
+    print(token);
     var headers = {"Authorization": token};
     try {
       http.Response response = await http.get(uri, headers: headers);
@@ -65,10 +68,10 @@ class ChatRepository {
     }
   }
 
-  Future<Map<String, dynamic>> sendMsg(String chatId, String message) async {
+  Future<Map<String, dynamic>> sendMsg(String senderToken, String chatId, String message) async {
     var uri = Uri.parse("$kBaseUrl/api/chat/add/$chatId");
-    var token = systemCtrl.token.value;
-    var headers = {"Authorization": token};
+    //var token = systemCtrl.token.value;
+    var headers = {"Authorization": senderToken};
     var body = {"message": message};
     try {
       http.Response response = await http.post(uri, headers: headers, body: body);

@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:book_share/components/animated_floating_buttons.dart';
 import 'package:book_share/components/grid_view_books.dart';
 import 'package:book_share/controllers/system_controller.dart';
 import 'package:book_share/controllers/user_controller.dart';
 import 'package:book_share/database/book_repository.dart';
+import 'package:book_share/database/chat_repository.dart';
 import 'package:book_share/localizations/i18n.dart';
-import 'package:book_share/messaging_test_2/notification.dart';
+import 'package:book_share/models/chat_details_model.dart';
+import 'package:book_share/services/notification.dart';
 import 'package:book_share/models/user_details_model.dart';
 import 'package:book_share/pages/chats_list.dart';
 import 'package:book_share/pages/edit_book_page.dart';
@@ -23,7 +27,6 @@ class MyLibraryPage extends StatefulWidget {
 
 class _MyLibraryPageState extends State<MyLibraryPage> {
   final UserController userCtrl = Get.find<UserController>();
-
   final SystemController systemCtrl = Get.find<SystemController>();
 
   @override
@@ -33,7 +36,7 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
 
     firebaseMessaging.streamCtlr.stream.listen(_changeData);
     firebaseMessaging.bodyCtlr.stream.listen(_changeBody);
-    firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
+    //firebaseMessaging.titleCtlr.stream.listen(_changeTitle);
 
     // For handling notification when the app is in background
     // but not terminated
@@ -45,19 +48,45 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
     super.initState();
   }
 
-  _changeData(String msg) {
-    print(msg);
-    systemCtrl.addUnreadMsgs();
+  @override
+  void dispose() {
+    final firebaseMessaging = FCM();
+    firebaseMessaging.dispose();
+    super.dispose();
+  }
+
+  _changeData(String msg) async {
+    print("RECEIVED DATA: $msg");
+    Map<String, dynamic> decoded = json.decode(msg);
+    print("DECODED ${decoded}");
+    decoded["id"] = int.parse(decoded["id"]);
+    decoded["datetime"] = int.parse(decoded["datetime"]);
+    Message messageReceived = Message.fromJson(decoded);
+    print(decoded["sendertoken"]);
+    Map<String, dynamic> chatMsgResponse = await ChatRepository().sendMsg(
+        decoded["sendertoken"],
+        systemCtrl.activeChatId.value,
+        messageReceived.message);
+    if (chatMsgResponse["success"]) {
+      systemCtrl.addMsgToChat(Message(
+          user: messageReceived.user,
+          message: messageReceived.message,
+          id: systemCtrl.activeChatMsgs.length,
+          datetime: messageReceived.datetime,
+          sendertoken: messageReceived.sendertoken
+      ));
+    } else {
+      print(chatMsgResponse["message"]);
+    }
   }
 
   _changeBody(String msg) {
-    print(msg);
-    systemCtrl.addUnreadMsgs();
+    print("Received Body");
+    systemCtrl.unreadMsgs.value++;
   }
 
   _changeTitle(String msg) {
-    print(msg);
-    systemCtrl.addUnreadMsgs();
+    print("Received Title");
   }
 
   @override
@@ -70,7 +99,7 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
         appBar: AppBar(
           leading: Obx(() => Center(
                 child: InkWell(
-                  onTap: ()=> Navigator.push(
+                  onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => const ChatsList(),
@@ -85,22 +114,24 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
                           size: 30,
                         ),
                       ),
-                      if (systemCtrl.unreadMsgs.value > 0) Positioned(
-                        right: 0,
-                        child: CircleAvatar(
-                          radius: 10,
-                          backgroundColor: Colors.red,
-                          child: Text(
-                            systemCtrl.unreadMsgs.value.toString(),
-                            style: TextStyle(
-                                fontSize: systemCtrl.unreadMsgs.value
-                                            .toString().length < 3
-                                    ? 14
-                                    : 10
+                      if (systemCtrl.unreadMsgs.value > 0)
+                        Positioned(
+                          right: 0,
+                          child: CircleAvatar(
+                            radius: 10,
+                            backgroundColor: Colors.red,
+                            child: Text(
+                              systemCtrl.unreadMsgs.value.toString(),
+                              style: TextStyle(
+                                  fontSize: systemCtrl.unreadMsgs.value
+                                              .toString()
+                                              .length <
+                                          3
+                                      ? 14
+                                      : 10),
                             ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -111,6 +142,7 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {
+                print("PRESSED");
                 clearPrefs();
                 systemCtrl.setIsLogged(false);
               },
@@ -126,11 +158,11 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
               width: MediaQuery.of(context).size.width * 0.95,
               child: Column(
                 children: [
-                  Obx(
-                    () => Expanded(
-                      child: userCtrl.currentUser.value.books != null &&
-                              userCtrl.currentUser.value.books!.isNotEmpty
-                          ? GridViewBooks(
+                  Expanded(
+                    child: userCtrl.currentUser.value.books != null &&
+                            userCtrl.currentUser.value.books!.isNotEmpty
+                        ? Obx(
+                            () => GridViewBooks(
                               listToShow: userCtrl.currentUser.value.books!,
                               callBack1: (Book book) => editBook(book, context),
                               icon1: const Icon(Icons.edit),
@@ -139,12 +171,13 @@ class _MyLibraryPageState extends State<MyLibraryPage> {
                                   removeBookFromMyList(book, context),
                               icon2: const Icon(Icons.delete_forever),
                               color2: Colors.red,
-                            )
-                          : Center(
-                              child: Text(
-                                  "No books added in your personal library.".i18n),
                             ),
-                    ),
+                          )
+                        : Center(
+                            child: Text(
+                                "No books added in your personal library."
+                                    .i18n),
+                          ),
                   ),
                 ],
               ),
